@@ -1,0 +1,12 @@
+# FROM docker.io/library/archlinux:latest
+FROM docker.io/archlinux
+
+ARG USER
+
+# RUN pacman -Sy update; pacman -Sy install httpd; pacman -R $(pacman -Qtdq); systemctl enable httpd
+RUN pacman --sync  --refresh --sysupgrade --noconfirm; pacman --sync  --noconfirm nginx; systemctl enable nginx
+RUN echo "Hello $USER"
+
+EXPOSE 80
+
+CMD [ "/sbin/init" ]
